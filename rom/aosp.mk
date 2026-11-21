@@ -15,8 +15,16 @@
 # Common
 include device/motorola/targets/include/common.mk
 
+# Inherit some common PixelOS stuff.
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+
+# PixelOS Flags
+TARGET_BOOT_ANIMATION_RES ?= 1080
+TARGET_GAPPS_ARCH := arm64
+PRODUCT_GMS_CLIENTID_BASE ?= android-motorola
+
 # Kernel
-$(call inherit-product, device/motorola/targets/include/kernel/prebuilt.mk)
+$(call inherit-product, device/motorola/targets/include/kernel/source.mk)
 
 PRODUCT_DEVICE := $(DEVICE)
 PRODUCT_NAME := aosp_$(DEVICE)
