@@ -22,7 +22,11 @@ ifeq ($(call is-kernel-greater-than-or-equal-to,5.4),true)
   TARGET_KERNEL_CLANG_VERSION := r450784e
   TARGET_KERNEL_LLVM_BINUTILS := true
 else
-  TARGET_KERNEL_CLANG_VERSION := r383902
+  ifneq ($(wildcard prebuilts/clang/host/linux-x86/clang-r383902),)
+    TARGET_KERNEL_CLANG_VERSION ?= r383902
+  else
+    TARGET_KERNEL_CLANG_VERSION ?= r450784e
+  endif
   TARGET_KERNEL_LLVM_BINUTILS := false
 endif
 TARGET_KERNEL_NO_GCC ?= false
